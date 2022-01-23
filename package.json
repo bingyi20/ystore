@@ -1,0 +1,23 @@
+{
+  "name": "wtstore",
+  "version": "0.0.1",
+  "description": "wtstore-强得很的小程序项目架构",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bingyi20/wtstore.git"
+  },
+  "keywords": [
+    "diff",
+    "miniprogram"
+  ],
+  "author": "bingyi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/bingyi20/wtstore/issues"
+  },
+  "homepage": "https://github.com/bingyi20/wtstore#readme"
+}
