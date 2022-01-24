@@ -9,6 +9,9 @@ Page({
   onLoad() {
     todoListStore.bind('todo', this)
   },
+  onUnload() {
+    todoListStore.remove(this)
+  },
   onInput(e) {
     todoListStore.onInput(e.detail.value)
   },
