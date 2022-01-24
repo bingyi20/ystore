@@ -1,6 +1,6 @@
 {
   "name": "wtstore",
-  "version": "0.0.2",
+  "version": "0.0.5",
   "description": "wtstore-强得很的小程序项目架构",
   "main": "src/index.js",
   "scripts": {
