@@ -11,27 +11,24 @@ let noop = function(){}
 const clone = require('rfdc')()
 
 class Store {
-    _size = 0
-    _views = []
-    _hasViews = new Map()
-    _callback = noop
 
     constructor() {
         this.id = ++uid
         this._data = {}
+        this._views = []
+        this._hasViews = new Map()
+        this._callback = noop
     }
 
     bind(key, view) {
         if(this._hasViews.has(view)) return Error("The same store and view cannot be bound repeatedly")
-        this._size++
         this._views.push({
             key,
             view
         })
         view.data[key] = this.data
-        view.setData({
-            key: this.data
-        })
+        view._preData = (view._preData ? view._preData : {})
+        this.render(view, key)
     }
 
     update(callback) {
@@ -48,7 +45,7 @@ class Store {
     run() {
         let promises = []
         this._views.forEach(item => {
-            promises.push(this.render(item.view, item.path))
+            promises.push(this.render(item.view, item.key))
         })
         // 所有UI数据更新完成之后执行回调
         Promise.allSettled(promises).then(this._callback)
@@ -56,20 +53,18 @@ class Store {
 
     render(view, path) {
         return new Promise((resolve) => {
-            const patch = this.diffData(view.data[path], view._preData[path])
-            view.setData({
-                path: patch
-            }, resolve)
+            const patch = this.diffData(view.data[path], view._preData[path], path)
+            view.setData(patch, resolve)
             // 深克隆可以进行优化，diff的时候就能进行数据的变更修改
             view._preData[path] = clone(view.data[path])
         })
     }
 
-    diffData(curr, pre) {
+    diffData(curr, pre, path = '') {
         if(!pre) pre = {}
         this.syncKeys(curr, pre)
         let result = {}
-        this.diff(curr, pre, '', result)
+        this.diff(curr, pre, path, result)
         return result
     }
 
