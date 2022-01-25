@@ -110,6 +110,24 @@ class Store {
         }
     }
 
+    /**
+     * 将this.data的数据挂载到this上
+     */
+    proxyData() {
+        Object.keys(this.data).forEach(key => {
+            Object.defineProperty(this, key, {
+                configurable: true,
+                enumerable: true,
+                get() {
+                    return this.data[key]
+                },
+                set(value) {
+                    this.data[key] = value
+                }
+            })
+        })
+    }
+
     getType(obj) {
         return Object.prototype.toString.call(obj)
     }
@@ -138,6 +156,7 @@ class Store {
             throw new Error('The right value must be a valid object.')
         }
         Object.assign(this._data, obj)
+        this.proxyData()
     }
 }
 
