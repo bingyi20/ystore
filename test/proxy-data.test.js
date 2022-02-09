@@ -15,7 +15,7 @@ class PersonStore extends Store {
         }
     }
     birthday() {
-        this.name++
+        this.age++
     }
 }
 
@@ -35,4 +35,10 @@ test('are the array data types equal', () => {
 
 test('are the deep data equal', () => {
     expect(bing.data.achievement.chinese === bing.achievement.chinese).toBe(true)
+})
+
+// 测试数据是否同步修改
+bing.birthday()
+test('Whether the data changes synchronously', () => {
+    expect(bing.data.age === bing.age).toBe(true)
 })
