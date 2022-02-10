@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "eventemitter3": "^4.0.7",
     "wtstore": "^0.0.7"
   }
 }

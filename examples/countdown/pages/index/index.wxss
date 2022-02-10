@@ -1,3 +1,8 @@
+.container {
+  font-family: 'Helvetica Neue';
+  font-size: 40rpx;
+}
+
 /**index.wxss**/
 .userinfo {
   display: flex;
