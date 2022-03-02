@@ -1,0 +1,38 @@
+<view class="container">
+    <view class="title">
+        todos
+    </view>
+    <view class="search">
+        <input type="text" placeholder="搜索"></input>
+    </view>
+    <view class="card">
+        <view class="todos">
+            <view class="todo">
+                <checkbox class="check"></checkbox>
+                <view class="text">
+                    编写自定义loader和自定义plugin
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class="card">
+        <view class="title">已完成</view>
+        <view class="todos">
+            <view class="todo">
+                <checkbox class="check"></checkbox>
+                <view class="text">
+                    完成三大生成树算法编写
+                </view>
+            </view>
+        </view>
+    </view>
+
+    <view class="add-btn">
+        +
+    </view>
+
+    
+
+
+</view>

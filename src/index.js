@@ -55,7 +55,7 @@ class Store {
         return new Promise((resolve) => {
             const patch = this.diffData(view.data[path], view._preData[path], path)
             view.setData(patch, resolve)
-            // 深克隆可以进行优化，diff的时候就能进行数据的变更修改
+            // 深克隆可以进行优化，diff的时候就能进行数据的变更对数据进行修改
             view._preData[path] = clone(view.data[path])
         })
     }
