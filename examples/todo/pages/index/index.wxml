@@ -1,38 +1,39 @@
 <view class="container">
     <view class="title">
-        todos
+        任务
     </view>
-    <view class="search">
-        <input type="text" placeholder="搜索"></input>
+    <view class="todos">
+        <todo-list todos="{{ todo.undoneTodos }}"></todo-list>
     </view>
-    <view class="card">
-        <view class="todos">
-            <view class="todo">
-                <checkbox class="check"></checkbox>
-                <view class="text">
-                    编写自定义loader和自定义plugin
-                </view>
+    <view class="done-title" wx:if="{{ todo.doneTodos.length }}" catch:tap="toggleView">
+        <image class="{{isOpenDoneList ? '' : 'hidden' }}" src="/assets/open.svg" />
+        已完成
+    </view>
+    <view class="todos" wx:if="{{ todo.doneTodos.length }}" hidden="{{ !isOpenDoneList }}">
+        <todo-list todos="{{ todo.doneTodos }}"></todo-list>
+    </view>
+    <view class="add-btn" catch:tap="showAddInput">
+        <view class="add-icon-wrapper">
+            <image src="/assets/add.svg" />
+        </view>
+        添加任务
+    </view>
+    <view class="add-input-wrapper"  wx:if="{{ addInputState }}" style="bottom: {{ inputBottom }}px; transition: bottom 260ms;">
+        <view class="add-input">
+            <view class="input-icon-wrapper">
+                <image src="/assets/circle.svg" />
             </view>
+            <input 
+                placeholder="添加任务" 
+                adjust-position="{{ false }}" 
+                focus="{{ isFocus }}"
+                bindkeyboardheightchange="onBindkeyboardheightchange"
+                bindblur="onBindblur"
+                bindconfirm="onBindconfirm"
+            />
         </view>
     </view>
-
-    <view class="card">
-        <view class="title">已完成</view>
-        <view class="todos">
-            <view class="todo">
-                <checkbox class="check"></checkbox>
-                <view class="text">
-                    完成三大生成树算法编写
-                </view>
-            </view>
-        </view>
+    <view class="modal" hidden="{{ true }}">
+        <search></search>
     </view>
-
-    <view class="add-btn">
-        +
-    </view>
-
-    
-
-
 </view>

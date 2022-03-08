@@ -1,0 +1,121 @@
+.container{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #6A7FCF;
+    padding-top: var(--status-bar-height);
+    padding: 0 16rpx;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+}
+
+.title {
+    width: 100%;
+    height: 100rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 50rpx;
+    font-weight: 500;
+    color: #FFFFFF;
+}
+
+.todos {
+    transition: all 300ms;
+}
+
+.done-title {
+    width: 150rpx;
+    height: 60rpx;
+    display: flex;
+    font-size: 28rpx;
+    justify-content: flex-start;
+    align-items: center;
+    color: #FFFFFF;
+    font-weight: 400;
+    background-color: rgba(0, 0, 0, 0.2);
+    border-radius: 8rpx;
+    margin: 20rpx 0;
+}
+
+.done-title image {
+    width: 30rpx;
+    height: 30rpx;
+    margin: 0 8rpx;
+    transition:all 300ms;
+}
+
+.done-title image.hidden {
+    transform: rotate(-90deg);
+}
+
+.add-btn {
+    width: 100%;
+    height: 100rpx;
+    border-radius: 12rpx;
+    background-color: rgba(0, 0, 0, 0.2);
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    position: absolute;
+    left: 0;
+    bottom: env(safe-area-inset-bottom);
+    color: #FFFFFF;
+}
+
+.add-icon-wrapper {
+    width: 100rpx;
+    height: 100rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.add-icon-wrapper image {
+    width: 50rpx;
+    height: 50rpx;
+}
+
+.add-input-wrapper{
+    width: 100%;
+    height: 120rpx;
+    padding-bottom: 40px; /* 动态计算给到的键盘高度单位是px，所以这里需要用px */
+    background-color: #FFFFFF;
+    position: fixed;
+    left: 0;
+    bottom: -40px;
+    box-sizing: content-box;
+    border-radius: 12rpx;
+}
+
+.add-input{
+    width: 100%;
+    height: 120rpx;
+    background-color: #FFFFFF;
+    border-top-left-radius: 12rpx;
+    border-top-right-radius: 12rpx;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.input-icon-wrapper {
+    width: 120rpx;
+    height: 120rpx;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.input-icon-wrapper image {
+    width: 50rpx;
+    height: 50rpx;
+}
+
+.add-input input {
+    flex-grow: 1;
+    padding-right: 16rpx;
+}
+

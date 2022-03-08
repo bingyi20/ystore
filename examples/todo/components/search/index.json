@@ -1,0 +1,6 @@
+{
+    "Component": true,
+    "usingComponents": {
+        "todo-list": "../todo-list/index"
+    }
+}

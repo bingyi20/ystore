@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {
+    "todo-list": "../../components/todo-list/index",
+    "search": "../../components/search/index"
+  }
 }

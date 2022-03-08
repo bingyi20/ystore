@@ -1,0 +1,16 @@
+<view class="todo-list">
+    <view class="todo" wx:for="{{ todos }}" wx:key="id">
+        <view class="radio-wrapper" data-id="{{ item.id }}" catch:tap="toggle">
+            <view class="radio" wx:if="{{!item.done}}"></view>
+            <view class="radio checked" wx:else>
+                <image src="/assets/ok.svg" />
+            </view>
+        </view>
+        <view class="text">
+            {{ item.value }}
+        </view>
+        <view class="delete" data-id="{{ item.id }}" data-value="{{ item.value }}" catch:tap="delete"> 
+            <image src="/assets/delete.svg" />
+        </view>
+    </view>
+</view>

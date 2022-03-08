@@ -1,26 +1,34 @@
-import Wtstore from 'westore'
+import Wtstore from 'wtstore'
 import TodoModel from '../model/todo-model'
+import { SEARCH_STATE } from '../model/todo-model'
 
-class TodeStore extends Wtstore {
+class TodoStore extends Wtstore {
     constructor() {
         super()
         this.data = {
             todos: [],
+            doneTodos: [],
+            undoneTOdos: [],
             searchTodos: []
         }
         this.todoModel = new TodoModel()
+
         this.todoModel.subscribe(() => {
-            this.data.todos = this.todoModel.data
-            this.searchTodos = this.todoModel.searchTodos
+            this.data.todos = this.todoModel.todos
+            this.data.doneTodos = this.todoModel.doneTodos
+            this.data.undoneTodos = this.todoModel.undoneTodos
+            this.data.searchText = this.todoModel.searchText
+            this.data.searchTodos = this.todoModel.searchTodos
+            this.update()
         })
     }
 
-    addTodo(text) {
-        this.todoModel.addTodo(text)
+    add(text) {
+        this.todoModel.add(text)
     }
 
-    removeTodo(id) {
-        this.todoModel.removeTodo(id)
+    delete(id) {
+        this.todoModel.delete(id)
     }
 
     toggle(id) {
@@ -30,6 +38,14 @@ class TodeStore extends Wtstore {
     search(text) {
         this.todoModel.search(text)
     }
+
+    onbindinput(value) {
+        this.todoModel.onbindinput(value)
+    }
+
+    clearHistory() {
+        this.todoModel.clearHistory()
+    }
 }
 
-export default new TodeStore()
+export default new TodoStore()

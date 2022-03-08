@@ -1,0 +1,20 @@
+<view class="search">
+    <view class="search-handler" style="width: calc(100% - {{MBBCRect.width}}px); height: {{ MBBCRect.height + 10 }}px;">
+        <view class="icon-wrapper">
+            <image src="/assets/search.svg" />
+        </view>
+        <input placeholder="搜索" placeholder-style="color: #FFFFFF;" bindinput="onBindinput" value="{{ todo.searchText }}" />
+        <view class="cancel">
+            取消
+        </view>
+    </view>
+    <view class="guide" wx:if="{{ todo.searchText === '' }}">
+        <image src="/assets/search-guide.png"/>
+        <view class="text">
+            你想查找什么内容？
+        </view>
+    </view>
+    <view class="todos" wx:else>
+        <todo-list todos="{{ todo.searchTodos }}"></todo-list>
+    </view>
+</view>

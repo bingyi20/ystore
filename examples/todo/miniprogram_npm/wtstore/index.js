@@ -4,7 +4,7 @@ var __DEFINE__ = function(modId, func, req) { var m = { exports: {}, _tempexport
 var __REQUIRE__ = function(modId, source) { if(!__MODS__[modId]) return require(source); if(!__MODS__[modId].status) { var m = __MODS__[modId].m; m._exports = m._tempexports; var desp = Object.getOwnPropertyDescriptor(m, "exports"); if (desp && desp.configurable) Object.defineProperty(m, "exports", { set: function (val) { if(typeof val === "object" && val !== m._exports) { m._exports.__proto__ = val.__proto__; Object.keys(val).forEach(function (k) { m._exports[k] = val[k]; }); } m._tempexports = val }, get: function () { return m._tempexports; } }); __MODS__[modId].status = 1; __MODS__[modId].func(__MODS__[modId].req, m, m.exports); } return __MODS__[modId].m.exports; };
 var __REQUIRE_WILDCARD__ = function(obj) { if(obj && obj.__esModule) { return obj; } else { var newObj = {}; if(obj != null) { for(var k in obj) { if (Object.prototype.hasOwnProperty.call(obj, k)) newObj[k] = obj[k]; } } newObj.default = obj; return newObj; } };
 var __REQUIRE_DEFAULT__ = function(obj) { return obj && obj.__esModule ? obj.default : obj; };
-__DEFINE__(1643004626097, function(require, module, exports) {
+__DEFINE__(1646294938278, function(require, module, exports) {
 const { queueStore } =  require("./schedules")
 
 const OBJECT_TYPE = '[object Object]'
@@ -117,6 +117,24 @@ class Store {
         }
     }
 
+    /**
+     * 将this.data的数据挂载到this上
+     */
+    proxyData() {
+        Object.keys(this.data).forEach(key => {
+            Object.defineProperty(this, key, {
+                configurable: true,
+                enumerable: true,
+                get() {
+                    return this.data[key]
+                },
+                set(value) {
+                    this.data[key] = value
+                }
+            })
+        })
+    }
+
     getType(obj) {
         return Object.prototype.toString.call(obj)
     }
@@ -145,13 +163,14 @@ class Store {
             throw new Error('The right value must be a valid object.')
         }
         Object.assign(this._data, obj)
+        this.proxyData()
     }
 }
 
 module.exports = Store
 
-}, function(modId) {var map = {"./schedules":1643004626098}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1643004626098, function(require, module, exports) {
+}, function(modId) {var map = {"./schedules":1646294938279}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1646294938279, function(require, module, exports) {
 
 let queue = []
 
@@ -183,7 +202,7 @@ exports.queueStore = function(store) {
     }
 }
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-return __REQUIRE__(1643004626097);
+return __REQUIRE__(1646294938278);
 })()
 //miniprogram-npm-outsideDeps=["rfdc"]
 //# sourceMappingURL=index.js.map
