@@ -18,7 +18,7 @@ Page({
     app.globalData.todoStore = todoStore
   },
   unonLoad() {
-  
+    todoStore.remove(this)
   },
   showAddInput() {
     this.setData({

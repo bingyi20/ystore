@@ -1,4 +1,4 @@
-<view class="search" wx:if="{{ todo.searchState }}">
+<view class="search" wx:if="{{ !todo.searchState }}">
     <view class="search-bar" style="width: calc(100% - {{MBBCRect.width}}px); height: {{ MBBCRect.height + 10 }}px;">
         <view class="icon-wrapper">
             <image src="/assets/search.svg" />

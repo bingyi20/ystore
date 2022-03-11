@@ -14,9 +14,11 @@
         <view class="todos">
             <todo-list todos="{{ todo.undoneTodos }}"></todo-list>
         </view>
-        <view class="done-title" wx:if="{{ todo.doneTodos.length }}" catch:tap="toggleView">
-            <image class="{{isOpenDoneList ? '' : 'hidden' }}" src="/assets/open.svg" />
-            已完成
+        <view class="done-title-hot" wx:if="{{ todo.doneTodos.length }}" catch:tap="toggleView">
+            <view class="done-title">
+                <image class="{{isOpenDoneList ? '' : 'hidden' }}" src="/assets/open.svg" />
+                已完成
+            </view>
         </view>
         <view class="todos" wx:if="{{ todo.doneTodos.length }}" hidden="{{ !isOpenDoneList }}">
             <todo-list todos="{{ todo.doneTodos }}"></todo-list>
@@ -47,6 +49,6 @@
     </view>
 
     <search-ball></search-ball>
-    <search bind:toggleSearch="toggleSearch"></search>
+    <search></search>
 
 </view>

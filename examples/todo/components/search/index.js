@@ -5,6 +5,7 @@ const app = getApp()
 Component({
     data: {
         isFocus: true,
+        opacity: 0.6,
         MBBCRect: {
             width: 87,
             height: 32,
@@ -12,13 +13,21 @@ Component({
             right: 51
         }
     },
-    attached() {
-        todoStore.bind('todo', this)
-        app.globalData.search = this
-        const res = wx.getMenuButtonBoundingClientRect()
-        this.setData({
-            MBBCRect: res
-        })
+    lifetimes: {
+        attached() {
+            todoStore.bind('todo', this)
+            app.globalData.search = this
+            const res = wx.getMenuButtonBoundingClientRect()
+            this.setData({
+                MBBCRect: res
+            })
+        },
+        detached() {
+            this.setData({
+                opacity: 0.6
+            })
+            todoStore.remove(this)
+        }
     },
     methods: {
         onBindinput(e) {

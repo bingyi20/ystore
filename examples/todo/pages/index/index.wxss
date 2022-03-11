@@ -39,6 +39,14 @@
     transition: all 300ms;
 }
 
+.done-title-hot {
+    width: 100%;
+    height: 100rpx;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
 .done-title {
     width: 150rpx;
     height: 60rpx;
@@ -50,7 +58,6 @@
     font-weight: 400;
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 8rpx;
-    margin: 20rpx 0;
 }
 
 .done-title image {
