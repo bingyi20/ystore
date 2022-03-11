@@ -1,3 +1,4 @@
+import { cheers } from '../utils/util'
 
 let ID = 0
 
@@ -13,24 +14,67 @@ export default class TodoModel {
         this.flushing = false
         this.todos = [{
             id: ID++,
-            value: '编写自定义loader和自定义plugin',
+            value: '跑5分钟的步',
             done: false
         },{
             id: ID++,
-            value: '三大生成树编写',
+            value: '学5分钟webpack',
             done: false
         },{
             id: ID++,
-            value: '中午11点点外卖',
+            value: '给婷子姐姐买早餐',
             done: true
         },{
             id: ID++,
-            value: '给婷子姐姐买咖啡',
+            value: '学5分钟浏览器工作原理',
             done: false
-        }, {
+        },{
             id: ID++,
-            value: '晚上11点看书'
+            value: '10分钟完成今天开发需求',
+            done: false
+        },{
+            id: ID++,
+            value: '打2小时游戏',
+            done: true
+        },{
+            id: ID++,
+            value: '刷5分钟算法',
+            done: false
+        },{
+            id: ID++,
+            value: '看一部电影',
+            done: false
+        },{
+            id: ID++,
+            value: '学5分钟设计模式',
+            done: false
+        },{
+            id: ID++,
+            value: '给婷子姐姐买咖啡',
+            done: true
+        },{
+            id: ID++,
+            value: '学5分钟设计模式',
+            done: false
+        },{
+            id: ID++,
+            value: '学5分钟设计模式',
+            done: false
+        },{
+            id: ID++,
+            value: '学5分钟设计模式',
+            done: false
+        },{
+            id: ID++,
+            value: '学5分钟设计模式',
+            done: false
+        },{
+            id: ID++,
+            value: '看一部电影',
+            done: false
         }]
+
+
         this.onChanges = []
         this._searchState = SEARCH_STATE.WORD
         this.searchText = ''
@@ -39,6 +83,8 @@ export default class TodoModel {
     }
 
     subscribe(fn) {
+        // 去个重吧
+        if(this.onChanges.indexOf(fn) > -1) return
         this.onChanges.push(fn)
         fn()
     }
@@ -67,8 +113,10 @@ export default class TodoModel {
     toggle(id) {
         for(let i = 0; i < this.todos.length; i++) {
             if(this.todos[i].id === id) {
-                this.doneCnt += (!this.todos[i].done) ? 1 : -1
                 this.todos[i].done = !this.todos[i].done
+                if(this.todos[i].done) {
+                    cheers()
+                }
                 break
             }
         }

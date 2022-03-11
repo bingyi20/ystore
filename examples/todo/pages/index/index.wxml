@@ -2,22 +2,34 @@
     <view class="title">
         任务
     </view>
-    <view class="todos">
-        <todo-list todos="{{ todo.undoneTodos }}"></todo-list>
-    </view>
-    <view class="done-title" wx:if="{{ todo.doneTodos.length }}" catch:tap="toggleView">
-        <image class="{{isOpenDoneList ? '' : 'hidden' }}" src="/assets/open.svg" />
-        已完成
-    </view>
-    <view class="todos" wx:if="{{ todo.doneTodos.length }}" hidden="{{ !isOpenDoneList }}">
-        <todo-list todos="{{ todo.doneTodos }}"></todo-list>
-    </view>
+    <!-- <view class="search-bar" catch:tap="toggleSearch">
+        <image src="/assets/search.svg" /> 搜索
+    </view> -->
+    <scroll-view 
+        scroll-y="{{ true }}" 
+        enhanced="{{ true }}"
+        show-scrollbar="{{ false }}" 
+        class="todos-content"
+    >
+        <view class="todos">
+            <todo-list todos="{{ todo.undoneTodos }}"></todo-list>
+        </view>
+        <view class="done-title" wx:if="{{ todo.doneTodos.length }}" catch:tap="toggleView">
+            <image class="{{isOpenDoneList ? '' : 'hidden' }}" src="/assets/open.svg" />
+            已完成
+        </view>
+        <view class="todos" wx:if="{{ todo.doneTodos.length }}" hidden="{{ !isOpenDoneList }}">
+            <todo-list todos="{{ todo.doneTodos }}"></todo-list>
+        </view>
+    </scroll-view>
+
     <view class="add-btn" catch:tap="showAddInput">
         <view class="add-icon-wrapper">
             <image src="/assets/add.svg" />
         </view>
         添加任务
     </view>
+    
     <view class="add-input-wrapper"  wx:if="{{ addInputState }}" style="bottom: {{ inputBottom }}px; transition: bottom 260ms;">
         <view class="add-input">
             <view class="input-icon-wrapper">
@@ -33,7 +45,8 @@
             />
         </view>
     </view>
-    <view class="modal" hidden="{{ true }}">
-        <search></search>
-    </view>
+
+    <search-ball></search-ball>
+    <search bind:toggleSearch="toggleSearch"></search>
+
 </view>

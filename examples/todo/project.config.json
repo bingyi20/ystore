@@ -9,7 +9,7 @@
         ]
     },
     "setting": {
-        "urlCheck": true,
+        "urlCheck": false,
         "es6": true,
         "enhance": true,
         "postcss": true,
@@ -48,7 +48,7 @@
     },
     "compileType": "miniprogram",
     "libVersion": "2.19.4",
-    "appid": "wxbaab97cf26251484",
+    "appid": "wxec851aa8f4cd2465",
     "projectname": "miniprogram-3",
     "debugOptions": {
         "hidedInDevtools": []

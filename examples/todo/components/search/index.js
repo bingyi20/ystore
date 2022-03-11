@@ -4,6 +4,7 @@ const app = getApp()
 
 Component({
     data: {
+        isFocus: true,
         MBBCRect: {
             width: 87,
             height: 32,
@@ -15,7 +16,6 @@ Component({
         todoStore.bind('todo', this)
         app.globalData.search = this
         const res = wx.getMenuButtonBoundingClientRect()
-        console.log(res)
         this.setData({
             MBBCRect: res
         })
@@ -25,6 +25,9 @@ Component({
             let value = e.detail.value.trim()
             if(value === todoStore.value) return
             todoStore.search(value)
+        },
+        clear() {
+            todoStore.search('')
         }
     }
 })

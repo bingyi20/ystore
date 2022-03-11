@@ -5,7 +5,6 @@
     top: 0;
     left: 0;
     background-color: #6A7FCF;
-    padding-top: var(--status-bar-height);
     padding: 0 16rpx;
     padding-top: env(safe-area-inset-top);
     padding-bottom: env(safe-area-inset-bottom);
@@ -13,13 +12,27 @@
 
 .title {
     width: 100%;
-    height: 100rpx;
+    height: 80rpx;
+    position: absolute;
+    background-color: inherit;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 50rpx;
     font-weight: 500;
     color: #FFFFFF;
+    top: env(safe-area-inset-top);
+    left: 0;
+    z-index: 1;
+}
+
+.todos-content {
+    height: 100%;
+    padding-top: 80rpx;
+    padding-bottom: 120rpx;
+    box-sizing: border-box;
+    z-index: 0;
+    overflow-y: scroll;
 }
 
 .todos {
@@ -55,7 +68,7 @@
     width: 100%;
     height: 100rpx;
     border-radius: 12rpx;
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: rgba(0, 0, 0, 0.1);
     display: flex;
     justify-content: flex-start;
     align-items: center;

@@ -8,17 +8,19 @@ class TodoStore extends Wtstore {
         this.data = {
             todos: [],
             doneTodos: [],
-            undoneTOdos: [],
-            searchTodos: []
+            undoneTodos: [],
+            searchTodos: [],
+            searchText: '',
+            searchState: false
         }
         this.todoModel = new TodoModel()
 
         this.todoModel.subscribe(() => {
-            this.data.todos = this.todoModel.todos
-            this.data.doneTodos = this.todoModel.doneTodos
-            this.data.undoneTodos = this.todoModel.undoneTodos
-            this.data.searchText = this.todoModel.searchText
-            this.data.searchTodos = this.todoModel.searchTodos
+            this.todos = this.todoModel.todos   // ==> this.data.todos = this.todoModel.todos
+            this.doneTodos = this.todoModel.doneTodos
+            this.undoneTodos = this.todoModel.undoneTodos
+            this.searchText = this.todoModel.searchText
+            this.searchTodos = this.todoModel.searchTodos
             this.update()
         })
     }
@@ -46,6 +48,13 @@ class TodoStore extends Wtstore {
     clearHistory() {
         this.todoModel.clearHistory()
     }
+
+    // 长尾业务逻辑不需要封装到model，可以直接在store中处理之后调用update更新即可
+    toggleSearch() {
+        this.searchState = !this.searchState
+        this.update()
+    }
+    
 }
 
 export default new TodoStore()

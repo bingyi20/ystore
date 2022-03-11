@@ -1,0 +1,22 @@
+.search-ball {
+    width: 100rpx;
+    height: 100rpx;
+    position: fixed;
+    background: rgba(0, 0, 0, 0.4);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    z-index: 99999;
+    transition: all 0;
+}
+
+.search-ball.moving {
+    width: 120rpx;
+    height: 120rpx;
+}
+
+.search-ball image {
+    width: 61.8%;
+    height: 61.8%;
+}

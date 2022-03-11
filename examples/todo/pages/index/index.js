@@ -10,6 +10,7 @@ Page({
     isFocus: false,
     inputBottom: 0,
     isOpenDoneList: true,
+    searchState: false,
   },
   onLoad() {
     todoStore.bind('todo', this)
@@ -48,5 +49,10 @@ Page({
     let value = e.detail.value.trim()
     if(value === '') return
     todoStore.add(value)
-  } 
+  },
+  toggleSearch() {
+    this.setData({
+      searchState: !this.data.searchState
+    })
+  }
 })

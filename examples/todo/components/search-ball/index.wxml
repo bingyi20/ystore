@@ -1,0 +1,12 @@
+
+<view 
+    class="search-ball {{moving ? 'moving': ''}}" 
+    style="top: {{position.top}}px; left: {{position.left}}px"
+    bind:tap="toggleSearch" 
+    bind:touchstart="ontouchstart" 
+    catch:touchmove="ontouchmove" 
+    bind:touchend="ontouchend"
+>
+    <image src="/assets/cancel.svg" wx:if="{{ todo.searchState }}" />
+    <image src="/assets/search.svg" wx:else />
+</view>

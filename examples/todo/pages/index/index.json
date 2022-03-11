@@ -1,6 +1,7 @@
 {
   "usingComponents": {
     "todo-list": "../../components/todo-list/index",
+    "search-ball": "../../components/search-ball/index",
     "search": "../../components/search/index"
   }
 }

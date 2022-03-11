@@ -1,11 +1,21 @@
-<view class="search">
-    <view class="search-handler" style="width: calc(100% - {{MBBCRect.width}}px); height: {{ MBBCRect.height + 10 }}px;">
+<view class="search" wx:if="{{ todo.searchState }}">
+    <view class="search-bar" style="width: calc(100% - {{MBBCRect.width}}px); height: {{ MBBCRect.height + 10 }}px;">
         <view class="icon-wrapper">
             <image src="/assets/search.svg" />
         </view>
-        <input placeholder="搜索" placeholder-style="color: #FFFFFF;" bindinput="onBindinput" value="{{ todo.searchText }}" />
-        <view class="cancel">
-            取消
+        <input 
+            placeholder="搜索" 
+            placeholder-style="color: #C3C9CC;"
+            confirm-hold="{{ true }}"
+            hold-keyboard="{{ true }}"
+            value="{{ todo.searchText }}" 
+            bindinput="onBindinput"
+            focus="{{ isFocus }}" 
+        />
+        <view class="clear-wrapper" wx:if="{{ todo.searchText }}" catch:tap="clear">
+            <view class="clear">
+                <image src="/assets/clear.svg" />
+            </view>
         </view>
     </view>
     <view class="guide" wx:if="{{ todo.searchText === '' }}">
