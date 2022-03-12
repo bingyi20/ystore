@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "wtstore": "^0.0.7"
+    "wtstore": "^1.0.0-beta1"
   }
 }

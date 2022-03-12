@@ -10,11 +10,19 @@ let noop = function(){}
 
 const clone = require('rfdc')()
 
+const p = Promise.resolve(1)
+
+// 微任务调度器
+const microTask = (fn) => {
+    p.then(fn)
+}
+
 class Store {
 
     constructor() {
         this.id = ++uid
         this._data = {}
+        this._preData = {}
         this._views = []
         this._hasViews = new Map()
         this._callback = noop
@@ -27,8 +35,7 @@ class Store {
             view
         })
         view.data[key] = this.data
-        view._preData = (view._preData ? view._preData : {})
-        this.render(view, key)
+        this.render(view, key, this.data)
     }
 
     update(callback) {
@@ -43,21 +50,32 @@ class Store {
     }
 
     run() {
+        const patch = this.diffData(this.data, this._preData, '')
         let promises = []
         this._views.forEach(item => {
-            promises.push(this.render(item.view, item.key))
+            promises.push(this.render(item.view, item.key, patch))
         })
         // 所有UI数据更新完成之后执行回调
         Promise.allSettled(promises).then(this._callback)
+        // 通过微任务做深拷贝，可以更早将渲染数据发送至渲染层
+        microTask(() => {
+            this._preData = clone(this.data)
+        })
     }
 
-    render(view, path) {
+    render(view, path, patch) {
         return new Promise((resolve) => {
-            const patch = this.diffData(view.data[path], view._preData[path], path)
-            view.setData(patch, resolve)
-            // 深克隆可以进行优化，diff的时候就能进行数据的变更对数据进行修改
-            view._preData[path] = clone(view.data[path])
+            const relPatch = this.splicePatch(path, patch)
+            view.setData(relPatch, resolve)
         })
+    }
+
+    splicePatch(path, patch) {
+        let result = {}
+        Object.keys(patch).forEach(key => {
+            result[`${path}.${key}`] = patch[key]
+        })
+        return result
     }
 
     diffData(curr, pre, path = '') {
