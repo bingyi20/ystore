@@ -6,7 +6,7 @@
                 <image src="/assets/ok.svg" />
             </view>
         </view>
-        <view class="text">
+        <view class="text {{item.done ? 'done' : ''}}">
             {{ item.value }}
         </view>
         <view class="delete" data-id="{{ item.id }}" data-value="{{ item.value }}" catch:tap="delete"> 
