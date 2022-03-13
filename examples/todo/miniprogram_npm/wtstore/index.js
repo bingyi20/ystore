@@ -4,7 +4,7 @@ var __DEFINE__ = function(modId, func, req) { var m = { exports: {}, _tempexport
 var __REQUIRE__ = function(modId, source) { if(!__MODS__[modId]) return require(source); if(!__MODS__[modId].status) { var m = __MODS__[modId].m; m._exports = m._tempexports; var desp = Object.getOwnPropertyDescriptor(m, "exports"); if (desp && desp.configurable) Object.defineProperty(m, "exports", { set: function (val) { if(typeof val === "object" && val !== m._exports) { m._exports.__proto__ = val.__proto__; Object.keys(val).forEach(function (k) { m._exports[k] = val[k]; }); } m._tempexports = val }, get: function () { return m._tempexports; } }); __MODS__[modId].status = 1; __MODS__[modId].func(__MODS__[modId].req, m, m.exports); } return __MODS__[modId].m.exports; };
 var __REQUIRE_WILDCARD__ = function(obj) { if(obj && obj.__esModule) { return obj; } else { var newObj = {}; if(obj != null) { for(var k in obj) { if (Object.prototype.hasOwnProperty.call(obj, k)) newObj[k] = obj[k]; } } newObj.default = obj; return newObj; } };
 var __REQUIRE_DEFAULT__ = function(obj) { return obj && obj.__esModule ? obj.default : obj; };
-__DEFINE__(1644508155535, function(require, module, exports) {
+__DEFINE__(1647104592091, function(require, module, exports) {
 const { queueStore } =  require("./schedules")
 
 const OBJECT_TYPE = '[object Object]'
@@ -17,11 +17,19 @@ let noop = function(){}
 
 const clone = require('rfdc')()
 
+const p = Promise.resolve(1)
+
+// 微任务调度器
+const microTask = (fn) => {
+    p.then(fn)
+}
+
 class Store {
 
     constructor() {
         this.id = ++uid
         this._data = {}
+        this._preData = {}
         this._views = []
         this._hasViews = new Map()
         this._callback = noop
@@ -34,8 +42,7 @@ class Store {
             view
         })
         view.data[key] = this.data
-        view._preData = (view._preData ? view._preData : {})
-        this.render(view, key)
+        this.render(view, key, this.data)
     }
 
     update(callback) {
@@ -50,21 +57,32 @@ class Store {
     }
 
     run() {
+        const patch = this.diffData(this.data, this._preData, '')
         let promises = []
         this._views.forEach(item => {
-            promises.push(this.render(item.view, item.key))
+            promises.push(this.render(item.view, item.key, patch))
         })
         // 所有UI数据更新完成之后执行回调
         Promise.allSettled(promises).then(this._callback)
+        // 通过微任务做深拷贝，可以更早将渲染数据发送至渲染层
+        microTask(() => {
+            this._preData = clone(this.data)
+        })
     }
 
-    render(view, path) {
+    render(view, path, patch) {
         return new Promise((resolve) => {
-            const patch = this.diffData(view.data[path], view._preData[path], path)
-            view.setData(patch, resolve)
-            // 深克隆可以进行优化，diff的时候就能进行数据的变更修改
-            view._preData[path] = clone(view.data[path])
+            const relPatch = this.splicePatch(path, patch)
+            view.setData(relPatch, resolve)
         })
+    }
+
+    splicePatch(path, patch) {
+        let result = {}
+        Object.keys(patch).forEach(key => {
+            result[`${path}.${key}`] = patch[key]
+        })
+        return result
     }
 
     diffData(curr, pre, path = '') {
@@ -169,8 +187,8 @@ class Store {
 
 module.exports = Store
 
-}, function(modId) {var map = {"./schedules":1644508155536}; return __REQUIRE__(map[modId], modId); })
-__DEFINE__(1644508155536, function(require, module, exports) {
+}, function(modId) {var map = {"./schedules":1647104592092}; return __REQUIRE__(map[modId], modId); })
+__DEFINE__(1647104592092, function(require, module, exports) {
 
 let queue = []
 
@@ -202,7 +220,7 @@ exports.queueStore = function(store) {
     }
 }
 }, function(modId) { var map = {}; return __REQUIRE__(map[modId], modId); })
-return __REQUIRE__(1644508155535);
+return __REQUIRE__(1647104592091);
 })()
 //miniprogram-npm-outsideDeps=["rfdc"]
 //# sourceMappingURL=index.js.map
