@@ -1,23 +1,26 @@
-# Wtstore
+# Ystore
 
 ## 安装
-``` 
-npm i wtstore --save
-```
 
+``` 
+npm i ystore --save
+```
 npm 相关问题参考：[小程序官方文档-npm支持](https://developers.weixin.qq.com/miniprogram/dev/devtools/npm.html)
 
-</br>
+## 架构
 
-## 整体架构
-- **Object-Oriented Programming**: Wtstore 强制小程序使用面向对象程序设计，开发者起手不是直接写页面，而是使用职责驱动设计 (Responsibility-Driven Design)的方式抽象出类、类属性和方法以及类之间的关联关系。
+### 性质
+
+- **Object-Oriented Programming**: Ystore 强制小程序使用面向对象程序设计，开发者起手不是直接写页面，而是使用职责驱动设计 (Responsibility-Driven Design)的方式抽象出类、类属性和方法以及类之间的关联关系。
 - **Write Once, Use Anywhere(Model)**: 通过面向对象分析设计出的 Model 可以表达整个业务模型，开发者可移植 100% 的 Model 代码不带任何改动到其他环境，并使用其他渲染技术承载项目的 View，比如小程序WebView、小游戏、Web浏览器、Canvas、WebGL。
-- **Passive View**: Wtstore架构下的 View 非常薄，没有参杂任何业务逻辑，只做被动改变。
-- **Simple and Intuitive**: Westore 内部使用 deepClone + dataDiff 换取最短路径， 比setData 更符合直觉的编程体验，只需修改数据，然后update，不需要再使用 setData(xxxxxxxxxxx)。
+- **Passive View**: Ystore架构下的 View 非常薄，没有参杂任何业务逻辑，只做被动改变。
+- **Simple and Intuitive**: Ystore 内部使用 deepClone + dataDiff 换取最短路径， 比setData 更符合直觉的编程体验，只需修改数据，然后update，不需要再使用 setData(xxxxxxxxxxx)。
 - **Testability**: View 和 Model 之间没有直接依赖，开发者能够借助模拟对象注入测试两者中的任一方。
-- **No invasion**: 在使用Wtstore的情况下，你依旧可以使用小程序原有的所有语法，Wtstore不会带来任何的副作用。
+- **No invasion**: 在使用Ystore的情况下，你依旧可以使用小程序原有的所有语法，Ystore不会带来任何的副作用。
 
-Westore 架构和 MVP(Model-View-Presenter) 架构很相似:
+### MVP
+
+Ystore 架构和 MVP(Model-View-Presenter) 架构很相似:
 - View 和 Store 是双向通讯，View 和 Store 互相引用
 - View 与 Model 不发生联系，都通过 Store 传递
 - Store 引用 Model 里对象的实例，Model 不依赖 Store
@@ -27,19 +30,23 @@ Westore 架构和 MVP(Model-View-Presenter) 架构很相似:
 
 Store 层可以理解成**中介者模式**中的中介者，使 View 和 Model 之间的多对多关系数量减少为 0，负责中转控制视图对象 View 和模型对象 Model 之间的交互。
 
-随着小程序承载的项目越来越复杂，合理的架构可以提升小程序的扩展性和维护性。把逻辑写到 Page/Component 是一种罪恶，当业务逻辑变得复杂的时候 Page/Component 会变得越来越臃肿难以维护，每次需求变更如履薄冰， westore 定义了一套合理的小程序架构适用于任何复杂度的小程序，让项目底座更健壮，易维护可扩展。
+随着小程序承载的项目越来越复杂，合理的架构可以提升小程序的扩展性和维护性。把逻辑写到 Page/Component 是一种罪恶，当业务逻辑变得复杂的时候 Page/Component 会变得越来越臃肿难以维护，每次需求变更如履薄冰， Ystore 定义了一套合理的小程序架构适用于任何复杂度的小程序，让项目底座更健壮，易维护可扩展。
 
 ## Packages
-- src           wtstore 的核心代码
-- examples   wtstore 官方例子
 
+| **项目**                         | **描述**                           |
+| ------------------------------- | ----------------------------------- |
+| [src](./src)  | Ystore 的核心代码 |
+| [examples](./examples) | Ystore 官方例子|
 
 ## 倒计时案例
-应用截图
+
+开发一个倒计时APP
+
 <img src="./assets/countdown.jpeg" width="300px">
 
 
-1. 定义Model
+### 定义Model
 
 ```js
 class Countdown extends EventEmitter {
@@ -78,9 +85,11 @@ class Countdown extends EventEmitter {
 
 model中封装了核心业务逻辑，当倒计时数据发生变化的时候，会通过发布事件`UPDATE`通知到相关订阅者
 
-2. 定义Store
+### 定义Store
 ```js
-class CountdownStore extends Wtstore {
+import Store from 'Yscore'
+
+class CountdownStore extends Store {
     constructor() {
         super()
         this.data = {
@@ -108,9 +117,9 @@ class CountdownStore extends Wtstore {
     }
 }
 ```
-store中会订阅Countdown数据更新事件，然后更新data的数据，调用父类Wtstore提供的update方法将数据更新到视图层
+store中会订阅Countdown数据更新事件，然后更新data的数据，调用父类Ystore提供的update方法将数据更新到视图层
 
-3. 视图层
+### 编写视图
 
 js
 ```js
@@ -143,21 +152,21 @@ wxml
   </view>
 </view>
 ```
-</br>
 
 详细代码[点击这里](./examples/countdown)
 
 对于这样简单的程序，或许不值得把这种逻辑分开，但随着需求的膨胀你会发现这么做带来的带来的巨大好处，下面再举一个稍微复杂一点点的例子
+
 ## TodoApp 案例
-1. 应用截图
+
+### 应用截图
 
 <img src="./assets/todo-home.jpeg" width="300px"> &nbsp;&nbsp; <img src="./assets/todo-search.jpeg" width="300px">
 
 
+### 设计类图
 
-2. 设计类图
-
-![todoApp设计类图](./assets/todo-class.png)
+![todoApp设计类图](./assets/todo-class-2.png)
 
 
 其中浅蓝色部分抽离了核心业务逻辑，纯JS代码，并且与平台无关，可以在小程序和web项目共用，不需要修改一行代码
@@ -170,21 +179,26 @@ wxml
 
 `VUE3` 做了很大的改动，其中一个比较核心的点是[组合式API](https://v3.cn.vuejs.org/guide/composition-api-introduction.html#什么是组合式-api)，`VUE3`借助组合式API可以很方便的进行业务逻辑的职责分离，使代码具有更好的可读性和可维护性。
 
-在Wtsore架构之下，使用面向对象的方式对核心业务逻辑抽离到Model之中，在纯js业务逻辑的Model里面，相较于`VUE3组合式API`提供的能力，你能做的更多，你可以充分释放你的想象力，更加优雅的设计你的类，更加灵活的对职责进行分离。。。写出更好的实现
-
-</br>
+在Wtsore架构之下，使用面向对象的方式将核心业务逻辑抽离到Model之中，你将bu在纯业务逻辑的Model里面，相较于`VUE3组合式API`提供的能力，你能做的更多，你可以充分释放你的想象力，更加优雅的设计你的程序，更加灵活的对职责进行分离。。。写出更好的实现
 
 ## 声明
-Wtstore站在[Westore](https://github.com/Tencent/westore)的肩膀上，在其MVP架构思想的基础之上做了大量改进与优化，重写了diff算法，其中包括不限于
+
+Ystore站在[Westore](https://github.com/Tencent/westore)的肩膀上，在其MVP架构思想的基础之上做了改进与优化，其中包括不限于
 - 支持单`view`关联多个`store`
 - 支持单个`store`服务多个`view`
-- 单个view支持`store`与自定义data共存
-- 优化数据重复diff问题
+- view支持`store`与自定义data共存
+- 重写diff算法，提高代码可读性
+- 优化重复diff运算问题
+- 为属性data增加安全处理，防止其地址被篡改
 - 修复内存泄漏问题
 - 支持UI更新后的回调
 ...
 
-</br>
+## 贡献
 
-## 贡献Wtstore
 欢迎，并且非常感谢。
+按照规范流程提PR即可，提PR之前需运行`npm run test`保证测试用例全部通过。
+
+## License
+
+MIT 
