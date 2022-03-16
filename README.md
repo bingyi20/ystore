@@ -43,7 +43,7 @@ Store 层可以理解成**中介者模式**中的中介者，使 View 和 Model 
 
 开发一个倒计时APP
 
-<img src="./assets/countdown.jpeg" width="300px">
+<img src="https://wechatapppro-1252524126.cdn.xiaoeknow.com/appAKLWLitn7978/image/b_u_5b2225aa46488_oGKN7IvA/l0tr88nm0lb3.jpeg" width="300px">
 
 
 ### 定义Model
@@ -161,12 +161,12 @@ wxml
 
 ### 应用截图
 
-<img src="./assets/todo-home.jpeg" width="300px"> &nbsp;&nbsp; <img src="./assets/todo-search.jpeg" width="300px">
+<img src="https://wechatapppro-1252524126.cdn.xiaoeknow.com/appAKLWLitn7978/image/b_u_5b2225aa46488_oGKN7IvA/l0tr88nl0g62.jpeg" width="300px"> &nbsp;&nbsp; <img src="https://wechatapppro-1252524126.cdn.xiaoeknow.com/appAKLWLitn7978/image/b_u_5b2225aa46488_oGKN7IvA/l0tr88nl0oof.jpeg" width="300px">
 
 
 ### 设计类图
 
-![todoApp设计类图](./assets/todo-class-2.png)
+![todoApp设计类图](https://wechatapppro-1252524126.cdn.xiaoeknow.com/appAKLWLitn7978/image/b_u_5b2225aa46488_oGKN7IvA/l0tr88nl0je2.png)
 
 
 其中浅蓝色部分抽离了核心业务逻辑，纯JS代码，并且与平台无关，可以在小程序和web项目共用，不需要修改一行代码
