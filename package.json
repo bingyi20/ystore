@@ -1,7 +1,7 @@
 {
-  "name": "wtstore",
+  "name": "ystore",
   "version": "1.0.0-beta1",
-  "description": "wtstore-强得很的小程序项目架构",
+  "description": "ystore-更好的小程序项目架构",
   "main": "src/index.js",
   "scripts": {
     "test": "jest"
