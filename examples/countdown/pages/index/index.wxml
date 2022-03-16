@@ -1,6 +1,10 @@
 <!--index.wxml-->
 <view class="container">
   <view class="count-down">
-    {{countdown.remainTime.days}} 天 {{countdown.remainTime.hours}} 时 {{countdown.remainTime.minutes}} 分 {{countdown.remainTime.seconds}} 秒 ： {{countdown.remainTime.count}}
+    <text class="number">{{countdown.remainTime.days}}</text> 天 
+    <text class="number">{{countdown.remainTime.hours}}</text> 时 
+    <text class="number">{{countdown.remainTime.minutes}}</text> 分 
+    <text class="number">{{countdown.remainTime.seconds}}</text> 秒 
+    : <text class="number">{{countdown.remainTime.count}}</text>
   </view>
 </view>

@@ -4,11 +4,6 @@ let ID = 0
 
 let p = Promise.resolve(1)
 
-export const SEARCH_STATE = {
-    WORD: 'word',
-    LIST: 'list'
-}
-
 export default class TodoModel {
     constructor() {
         this.flushing = false
@@ -22,15 +17,11 @@ export default class TodoModel {
             done: false
         },{
             id: ID++,
-            value: '给婷子姐姐买早餐',
+            value: '学习wtstore架构',
             done: true
         },{
             id: ID++,
             value: '学5分钟浏览器工作原理',
-            done: false
-        },{
-            id: ID++,
-            value: '10分钟完成今天开发需求',
             done: false
         },{
             id: ID++,
@@ -48,37 +39,10 @@ export default class TodoModel {
             id: ID++,
             value: '学5分钟设计模式',
             done: false
-        },{
-            id: ID++,
-            value: '给婷子姐姐买咖啡',
-            done: true
-        },{
-            id: ID++,
-            value: '学5分钟设计模式',
-            done: false
-        },{
-            id: ID++,
-            value: '学5分钟设计模式',
-            done: false
-        },{
-            id: ID++,
-            value: '学5分钟设计模式',
-            done: false
-        },{
-            id: ID++,
-            value: '学5分钟设计模式',
-            done: false
-        },{
-            id: ID++,
-            value: '看一部电影',
-            done: false
         }]
 
-
         this.onChanges = []
-        this._searchState = SEARCH_STATE.WORD
         this.searchText = ''
-        this.searchHistory = []
 
     }
 
@@ -123,34 +87,13 @@ export default class TodoModel {
         this.inform()
     }
 
-    onbindinput(value) {
-        value = value.trim()
-        console.log(value)
-        this.searchText = value
-        if(value === '') {
-            this.searchState = SEARCH_STATE.WORD
-        }
-        this.inform()
-    }
-
     search(text) {
         text = text.trim()
+        if(text == this.searchText) return
         this.searchText = text
         if(text === '') {
             return this.inform()
         }
-
-        // 做一次LRU处理
-        let idx = this.searchHistory.indexOf(text)
-        if(idx > -1) this.searchHistory.splice(idx, 1)
- 
-        this.searchHistory.unshift(text)
-        this.searchState = SEARCH_STATE.LIST
-        this.inform()
-    }
-
-    clearHistory() {
-        this.searchHistory = []
         this.inform()
     }
 
@@ -164,14 +107,5 @@ export default class TodoModel {
 
     get searchTodos() {
         return this.todos.filter((todo) => todo.value.includes(this.searchText))
-    }
-
-    set searchState(val) {
-        this._searchState = val
-        this.inform() 
-    }
-
-    get searchState() {
-        return this._searchState
     }
 }

@@ -14,8 +14,6 @@ Page({
   },
   onLoad() {
     todoStore.bind('todo', this)
-    app.globalData.todoView = this
-    app.globalData.todoStore = todoStore
   },
   unonLoad() {
     todoStore.remove(this)
@@ -45,14 +43,9 @@ Page({
       inputBottom: -DUMMY_HEIGHT
     })
   },
-  onBindconfirm(e) {
+  add(e) {
     let value = e.detail.value.trim()
     if(value === '') return
     todoStore.add(value)
-  },
-  toggleSearch() {
-    this.setData({
-      searchState: !this.data.searchState
-    })
   }
 })

@@ -41,14 +41,6 @@ class TodoStore extends Wtstore {
         this.todoModel.search(text)
     }
 
-    onbindinput(value) {
-        this.todoModel.onbindinput(value)
-    }
-
-    clearHistory() {
-        this.todoModel.clearHistory()
-    }
-
     // 长尾业务逻辑不需要封装到model，可以直接在store中处理之后调用update更新即可
     toggleSearch() {
         this.searchState = !this.searchState
