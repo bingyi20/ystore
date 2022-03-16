@@ -1,8 +1,8 @@
-import Wtstore from 'wtstore'
+import Store from 'ystore'
 import TodoModel from '../model/todo-model'
 import { SEARCH_STATE } from '../model/todo-model'
 
-class TodoStore extends Wtstore {
+class TodoStore extends Store {
     constructor() {
         super()
         this.data = {

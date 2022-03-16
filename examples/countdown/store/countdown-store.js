@@ -1,9 +1,9 @@
-import Wtstore from 'wtstore'
+import Store from 'ystore'
 import Countdown from '../model/countdown'
 import { UPDATE, countdownStatus, toFixed } from '../model/countdown'
 
 
-class CountdownStore extends Wtstore {
+class CountdownStore extends Store {
     constructor() {
         super()
         this.data = {
