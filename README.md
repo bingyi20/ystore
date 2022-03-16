@@ -87,7 +87,7 @@ model中封装了核心业务逻辑，当倒计时数据发生变化的时候，
 
 ### 定义Store
 ```js
-import Store from 'Yscore'
+import Store from 'Ystore'
 
 class CountdownStore extends Store {
     constructor() {
@@ -179,7 +179,7 @@ wxml
 
 `VUE3` 做了很大的改动，其中一个比较核心的点是[组合式API](https://v3.cn.vuejs.org/guide/composition-api-introduction.html#什么是组合式-api)，`VUE3`借助组合式API可以很方便的进行业务逻辑的职责分离，使代码具有更好的可读性和可维护性。
 
-在Wtsore架构之下，使用面向对象的方式将核心业务逻辑抽离到Model之中，你将bu在纯业务逻辑的Model里面，相较于`VUE3组合式API`提供的能力，你能做的更多，你可以充分释放你的想象力，更加优雅的设计你的程序，更加灵活的对职责进行分离。。。写出更好的实现
+在Ystore架构之下，使用面向对象的方式将核心业务逻辑抽离到Model之中，你将bu在纯业务逻辑的Model里面，相较于`VUE3组合式API`提供的能力，你能做的更多，你可以充分释放你的想象力，更加优雅的设计你的程序，更加灵活的对职责进行分离。。。写出更好的实现
 
 ## 声明
 
