@@ -1,7 +1,6 @@
 # Wtstore
 
 ## 安装
----
 ``` 
 npm i wtstore --save
 ```
@@ -11,7 +10,6 @@ npm 相关问题参考：[小程序官方文档-npm支持](https://developers.we
 </br>
 
 ## 整体架构
----
 - **Object-Oriented Programming**: Wtstore 强制小程序使用面向对象程序设计，开发者起手不是直接写页面，而是使用职责驱动设计 (Responsibility-Driven Design)的方式抽象出类、类属性和方法以及类之间的关联关系。
 - **Write Once, Use Anywhere(Model)**: 通过面向对象分析设计出的 Model 可以表达整个业务模型，开发者可移植 100% 的 Model 代码不带任何改动到其他环境，并使用其他渲染技术承载项目的 View，比如小程序WebView、小游戏、Web浏览器、Canvas、WebGL。
 - **Passive View**: Wtstore架构下的 View 非常薄，没有参杂任何业务逻辑，只做被动改变。
@@ -32,14 +30,11 @@ Store 层可以理解成**中介者模式**中的中介者，使 View 和 Model 
 随着小程序承载的项目越来越复杂，合理的架构可以提升小程序的扩展性和维护性。把逻辑写到 Page/Component 是一种罪恶，当业务逻辑变得复杂的时候 Page/Component 会变得越来越臃肿难以维护，每次需求变更如履薄冰， westore 定义了一套合理的小程序架构适用于任何复杂度的小程序，让项目底座更健壮，易维护可扩展。
 
 ## Packages
---- 
 - src           wtstore 的核心代码
 - examples   wtstore 官方例子
 
 
 ## 倒计时案例
---- 
-
 ![wtstore倒计时案例](/assets/countdown.jpeg)
 <center>倒计时截图</center>
 
@@ -154,7 +149,6 @@ wxml
 
 对于这样简单的程序，或许不值得把这种逻辑分开，但随着需求的膨胀你会发现这么做带来的带来的巨大好处，下面再举一个稍微复杂一点点的例子
 ## TodoApp 案例
---- 
 1. 应用截图
 
 ![todo-首页](/assets/todo-home.jpeg)
@@ -177,7 +171,7 @@ wxml
 详细代码[点击这里](./examples/todo)
 
 ## Model抽离的契机
---- 
+ 
 > 再简单的程序，也有更好的实现
 
 `VUE3` 做了很大的改动，其中一个比较核心的点是[组合式API](https://v3.cn.vuejs.org/guide/composition-api-introduction.html#什么是组合式-api)，`VUE3`借助组合式API可以很方便的进行业务逻辑的职责分离，使代码具有更好的可读性和可维护性。
@@ -187,7 +181,6 @@ wxml
 </br>
 
 ## 声明
---- 
 Wtstore站在[Westore](https://github.com/Tencent/westore)的肩膀上，在其MVP架构思想的基础之上做了大量改进与优化，重写了diff算法，其中包括不限于
 - 支持单`view`关联多个`store`
 - 支持单个`store`服务多个`view`
@@ -200,5 +193,4 @@ Wtstore站在[Westore](https://github.com/Tencent/westore)的肩膀上，在其M
 </br>
 
 ## 贡献Wtstore
---- 
 欢迎，并且非常感谢。
