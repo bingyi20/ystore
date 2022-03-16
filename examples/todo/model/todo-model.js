@@ -108,13 +108,4 @@ export default class TodoModel {
     get searchTodos() {
         return this.todos.filter((todo) => todo.value.includes(this.searchText))
     }
-
-    set searchState(val) {
-        this._searchState = val
-        this.inform() 
-    }
-
-    get searchState() {
-        return this._searchState
-    }
 }
