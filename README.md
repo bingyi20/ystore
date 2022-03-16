@@ -1,19 +1,17 @@
-# README
+# Wtstore
 
-## 关键词说明
-**view**: Page/Component实例
-
-**store**: 继承自类Store的实例
-
-**model**: 核心业务逻辑实例
-
----
 ## 安装
-`` npm i wtstore --save
+---
+``` 
+npm i wtstore --save
+```
+
 npm 相关问题参考：[小程序官方文档-npm支持](https://developers.weixin.qq.com/miniprogram/dev/devtools/npm.html)
 
----
+</br>
+
 ## 整体架构
+---
 - **Object-Oriented Programming**: Wtstore 强制小程序使用面向对象程序设计，开发者起手不是直接写页面，而是使用职责驱动设计 (Responsibility-Driven Design)的方式抽象出类、类属性和方法以及类之间的关联关系。
 - **Write Once, Use Anywhere(Model)**: 通过面向对象分析设计出的 Model 可以表达整个业务模型，开发者可移植 100% 的 Model 代码不带任何改动到其他环境，并使用其他渲染技术承载项目的 View，比如小程序WebView、小游戏、Web浏览器、Canvas、WebGL。
 - **Passive View**: Wtstore架构下的 View 非常薄，没有参杂任何业务逻辑，只做被动改变。
@@ -33,20 +31,17 @@ Store 层可以理解成**中介者模式**中的中介者，使 View 和 Model 
 
 随着小程序承载的项目越来越复杂，合理的架构可以提升小程序的扩展性和维护性。把逻辑写到 Page/Component 是一种罪恶，当业务逻辑变得复杂的时候 Page/Component 会变得越来越臃肿难以维护，每次需求变更如履薄冰， westore 定义了一套合理的小程序架构适用于任何复杂度的小程序，让项目底座更健壮，易维护可扩展。
 
----
-
 ## Packages
+--- 
 - src           wtstore 的核心代码
 - examples   wtstore 官方例子
 
----
+
 ## 倒计时案例
-> 应用截图
+--- 
 
 ![wtstore倒计时案例](/assets/countdown.jpeg)
-
-
-**以下只给出了核心代码部分，完整代码请移步 /examples/countdown目录**
+<center>倒计时截图</center>
 
 
 1. 定义Model
@@ -118,7 +113,7 @@ class CountdownStore extends Wtstore {
     }
 }
 ```
-store中会订阅Countdown数据更新事件，然后更新自己应该更新的数据，然后调用父类Wtstore提供的update方法进行UI的更新
+store中会订阅Countdown数据更新事件，然后更新data的数据，调用父类Wtstore提供的update方法将数据更新到视图层
 
 3. 视图层
 
@@ -153,25 +148,57 @@ wxml
   </view>
 </view>
 ```
+</br>
 
+详细代码[点击这里](./examples/countdown)
 
+对于这样简单的程序，或许不值得把这种逻辑分开，但随着需求的膨胀你会发现这么做带来的带来的巨大好处，下面再举一个稍微复杂一点点的例子
 ## TodoApp 案例
+--- 
 1. 应用截图
+
+![todo-首页](/assets/todo-home.jpeg)
+<center>首页</center>
+<br/>
+<br/>
+<br/>
+
+![todo-搜索页](/assets/todo-search.jpeg)
+<center>搜索页</center>
 
 
 2. 设计类图
 
+![todo-设计类图](/assets/todo-class-2.png)
+<center>设计类图</center>
 
-3. 其它
+其中浅蓝色部分抽离了核心业务逻辑，纯JS代码，并且与平台无关，可以在小程序和web项目共用，不需要修改一行代码
 
+详细代码[点击这里](./examples/todo)
 
-## 贡献
+## Model抽离的契机
+--- 
+> 再简单的程序，也有更好的实现
 
+`VUE3` 做了很大的改动，其中一个比较核心的点是[组合式API](https://v3.cn.vuejs.org/guide/composition-api-introduction.html#什么是组合式-api)，`VUE3`借助组合式API可以很方便的进行业务逻辑的职责分离，使代码具有更好的可读性和可维护性。
+
+在Wtsore架构之下，使用面向对象的方式对核心业务逻辑抽离到Model之中，在纯js业务逻辑的Model里面，相较于`VUE3组合式API`提供的能力，你能做的更多，你可以充分释放你的想象力，更加优雅的设计你的类，更加灵活的对职责进行分离。。。写出更好的实现
+
+</br>
 
 ## 声明
-Wtstore借鉴自westore，在其MVP架构思想的基础之上做了大量改进与优化，diff算法也进行了重写，其中包括不限于
-- 支持单**view**绑定多个**store**进行使用
-- 支持单个**store**绑定多个**view**进行使用
-- 统一内存回收策略
-- 能监控到UI更新完成执行后续回调
+--- 
+Wtstore站在[Westore](https://github.com/Tencent/westore)的肩膀上，在其MVP架构思想的基础之上做了大量改进与优化，重写了diff算法，其中包括不限于
+- 支持单`view`关联多个`store`
+- 支持单个`store`服务多个`view`
+- 单个view支持`store`与自定义data共存
+- 优化数据重复diff问题
+- 修复内存泄漏问题
+- 支持UI更新后的回调
+...
 
+</br>
+
+## 贡献Wtstore
+--- 
+欢迎，并且非常感谢。
