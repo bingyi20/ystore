@@ -35,8 +35,8 @@ Store 层可以理解成**中介者模式**中的中介者，使 View 和 Model 
 
 
 ## 倒计时案例
-![wtstore倒计时案例](/assets/countdown.jpeg)
-<center>倒计时截图</center>
+应用截图
+<img src="./assets/countdown.jpeg" width="300px">
 
 
 1. 定义Model
@@ -151,20 +151,14 @@ wxml
 ## TodoApp 案例
 1. 应用截图
 
-![todo-首页](/assets/todo-home.jpeg)
-<center>首页</center>
-<br/>
-<br/>
-<br/>
+<img src="./assets/todo-home.jpeg" width="300px"> &nbsp;&nbsp; <img src="./assets/todo-search.jpeg" width="300px">
 
-![todo-搜索页](/assets/todo-search.jpeg)
-<center>搜索页</center>
 
 
 2. 设计类图
 
-![todo-设计类图](/assets/todo-class-2.png)
-<center>设计类图</center>
+![todoApp设计类图](./assets/todo-class.png)
+
 
 其中浅蓝色部分抽离了核心业务逻辑，纯JS代码，并且与平台无关，可以在小程序和web项目共用，不需要修改一行代码
 
