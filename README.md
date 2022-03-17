@@ -16,7 +16,7 @@ npm 相关问题参考：[小程序官方文档-npm支持](https://developers.we
 - **Passive View**: Ystore架构下的 View 非常薄，没有参杂任何业务逻辑，只做被动改变。
 - **Simple and Intuitive**: Ystore 内部使用 deepClone + dataDiff 换取最短路径， 比setData 更符合直觉的编程体验，只需修改数据，然后update，不需要再使用 setData(xxxxxxxxxxx)。
 - **Testability**: View 和 Model 之间没有直接依赖，开发者能够借助模拟对象注入测试两者中的任一方。
-- **No invasion**: 在使用Ystore的情况下，你依旧可以使用小程序原有的所有语法，Ystore不会带来任何的副作用。
+- **No invasion**: 在使用Ystore的情况下，你依旧可以使用小程序原有的所有语法，Ystore不会带来副作用。
 
 ### MVP
 
@@ -41,7 +41,7 @@ Store 层可以理解成**中介者模式**中的中介者，使 View 和 Model 
 
 ## 倒计时案例
 
-开发一个倒计时APP
+### 应用截图
 
 <img src="https://wechatapppro-1252524126.cdn.xiaoeknow.com/appAKLWLitn7978/image/b_u_5b2225aa46488_oGKN7IvA/l0tr88nm0lb3.jpeg" width="300px">
 
@@ -179,7 +179,7 @@ wxml
 
 `VUE3` 做了很大的改动，其中一个比较核心的点是[组合式API](https://v3.cn.vuejs.org/guide/composition-api-introduction.html#什么是组合式-api)，`VUE3`借助组合式API可以很方便的进行业务逻辑的职责分离，使代码具有更好的可读性和可维护性。
 
-在Ystore架构之下，使用面向对象的方式将核心业务逻辑抽离到Model之中，你将bu在纯业务逻辑的Model里面，相较于`VUE3组合式API`提供的能力，你能做的更多，你可以充分释放你的想象力，更加优雅的设计你的程序，更加灵活的对职责进行分离。。。写出更好的实现
+在Ystore架构之下，使用面向对象的方式将核心业务逻辑抽离到Model之中，你将bu在纯业务逻辑的Model里面，相较于`VUE3组合式API`提供的能力，你能做的更多，你可以充分释放想象力，更加优雅的设计你的程序，更加灵活的对职责进行分离。。。写出更好的实现
 
 ## 声明
 
@@ -191,13 +191,11 @@ Ystore站在[Westore](https://github.com/Tencent/westore)的肩膀上，在其MV
 - 优化重复diff运算问题
 - 为属性data增加安全处理，防止其地址被篡改
 - 修复内存泄漏问题
-- 支持UI更新后的回调
-...
+- 支持UI更新后回调
 
 ## 贡献
 
-欢迎，并且非常感谢。
-按照规范流程提PR即可，提PR之前需运行`npm run test`保证测试用例全部通过。
+欢迎，并且非常感谢。按照规范流程提PR即可，提PR之前需运行`npm run test`保证测试用例全部通过。
 
 ## License
 
