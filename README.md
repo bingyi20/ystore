@@ -1,4 +1,4 @@
-# Ystore
+# Ystore-更好的小程序项目架构
 
 ## 安装
 
@@ -25,7 +25,7 @@ Ystore 架构和 MVP(Model-View-Presenter) 架构很相似:
 - View 与 Model 不发生联系，都通过 Store 传递
 - Store 引用 Model 里对象的实例，Model 不依赖 Store
 - View 非常薄，不部署任何业务逻辑，称为"被动视图"（Passive View），即没有任何主动性
-- Store 非常薄，只复杂维护 View 需要的数据和桥接 View 和 Model
+- Store 非常薄，只负责维护 View 需要的数据和桥接 View 和 Model
 - Model 非常厚，但是都是纯JS逻辑代码，你可以基于业务中的不同指责对你的Model类进行精心设计   所有逻辑都部署在那里，Model 可以脱离 Store 和 View 完整表达所有业务/游戏逻辑
 
 Store 层可以理解成**中介者模式**中的中介者，使 View 和 Model 之间的多对多关系数量减少为 0，负责中转控制视图对象 View 和模型对象 Model 之间的交互。
