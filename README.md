@@ -159,6 +159,11 @@ wxml
 
 ## TodoApp 案例
 
+
+### 扫码预览
+<img src="https://wechatapppro-1252524126.cdn.xiaoeknow.com/appAKLWLitn7978/image/b_u_5b2225aa46488_oGKN7IvA/l1agx8kl01kk.jpg" width="300px">
+
+
 ### 应用截图
 
 <img src="https://wechatapppro-1252524126.cdn.xiaoeknow.com/appAKLWLitn7978/image/b_u_5b2225aa46488_oGKN7IvA/l0tr88nl0g62.jpeg" width="300px"> &nbsp;&nbsp; <img src="https://wechatapppro-1252524126.cdn.xiaoeknow.com/appAKLWLitn7978/image/b_u_5b2225aa46488_oGKN7IvA/l0tr88nl0oof.jpeg" width="300px">
